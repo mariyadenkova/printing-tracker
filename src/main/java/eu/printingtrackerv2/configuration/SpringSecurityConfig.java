@@ -36,7 +36,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()        //.anyRequest().permitAll(); -> as if to disable the security
-                .antMatchers("/", "/register", "/bootstrap/**", "/jquery/**", "/text/javascript/**").permitAll()
+                .antMatchers("/", "/h2/**", "/register", "/bootstrap/**", "/jquery/**", "/text/javascript/**").permitAll()
                 //.antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/user/**").access("hasRole('ADMIN') OR hasRole('USER')")
                 .antMatchers("/admin/**").hasRole("ADMIN")
@@ -60,6 +60,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/login?logout").permitAll()
             .and()
                 .exceptionHandling().accessDeniedPage("/unauthorized")
+            .and()
+                .headers().frameOptions().sameOrigin()
             .and()
                 .csrf().disable();
 
