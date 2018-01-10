@@ -30,7 +30,7 @@ public class AddressController {
     @Autowired
     private CustomerService customerService;
 
-    @ModelAttribute("customers")
+    @ModelAttribute("/customers")
     public Set<CustomerNameViewModel> getCustomersNames() {
         return this.customerService.getAllCustomersNames();
     }
