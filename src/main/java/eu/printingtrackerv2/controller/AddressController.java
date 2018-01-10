@@ -43,8 +43,8 @@ public class AddressController {
     }
 
     @GetMapping("/address/customer/*{customerId}")
-    public String getCustomerAddressesPage(Model model, @PathVariable Long customId) {
-        Set<AddressViewModel> addresses = this.addressService.findAllAddressesByCustomerId(customId);
+    public String getCustomerAddressesPage(Model model, @PathVariable Long customerId) {
+        Set<AddressViewModel> addresses = this.addressService.findAllAddressesByCustomerId(customerId);
         model.addAttribute("addresses", addresses);
         return "address-customer";
     }
