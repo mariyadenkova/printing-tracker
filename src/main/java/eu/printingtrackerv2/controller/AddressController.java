@@ -30,7 +30,7 @@ public class AddressController {
     @Autowired
     private CustomerService customerService;
 
-    @ModelAttribute("/customers")
+    @ModelAttribute("customers")
     public Set<CustomerNameViewModel> getCustomersNames() {
         return this.customerService.getAllCustomersNames();
     }
@@ -43,8 +43,8 @@ public class AddressController {
     }
 
     @GetMapping("/address/customer/*{customerId}")
-    public String getCustomerAddressesPage(Model model, @PathVariable Long customerId) {
-        Set<AddressViewModel> addresses = this.addressService.findAllAddressesByCustomerId(customerId);
+    public String getCustomerAddressesPage(Model model, @PathVariable Long customId) {
+        Set<AddressViewModel> addresses = this.addressService.findAllAddressesByCustomerId(customId);
         model.addAttribute("addresses", addresses);
         return "address-customer";
     }

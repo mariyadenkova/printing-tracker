@@ -17,6 +17,8 @@ public class CustomerViewModel {
 
     private Set<Address> addresses;
 
+    private Set<Address> names;
+
     public CustomerViewModel() {
     }
 

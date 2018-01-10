@@ -26,7 +26,6 @@
             </thead>
             <tbody>
             <tr th:each="address : ${addresses}" th:object="${address}">
-                <td th:text="*{customerName}">customerName</td>
                 <td th:text="*{street}">street</td>
                 <td th:text="*{businessCenterName}">businessCenterName</td>
                 <td th:text="*{block}">block</td>
