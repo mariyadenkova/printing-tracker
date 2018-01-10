@@ -49,5 +49,29 @@ public class AddressServiceImpl implements AddressService {
         return models;
     }
 
+    @Override
+    public Set<AddressViewModel> findAllAddressesByCustomerId(Long customId) {
+        Set<Address> customers = this.addressRepository.findAllByCustomerId(customId);
+        Set<AddressViewModel> customerViewModels = new HashSet<>();
+        for(Address address : customers) {
+            AddressViewModel model = this.modelMapper.map(address, AddressViewModel.class);
+            customerViewModels.add(model);
+        }
 
+        return customerViewModels;
+    }
+
+    /*@Override
+    public Set<AddressViewModel> findAllAddressesByCustomerId(Long id) {
+        Customer customer = this.customerRepository.findOne(id);
+        Set<Address> addresses = this.addressRepository.findAllByCustomerId(id);
+        Set<AddressViewModel> models = new HashSet<>();
+        customer.setAddresses(addresses);
+        for (Address address : addresses) {
+            AddressViewModel model = this.modelMapper.map(address, AddressViewModel.class);
+            models.add();
+        }
+
+        return models;
+    }*/
 }

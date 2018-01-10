@@ -8,7 +8,7 @@ import java.util.Set;
 public class AddressViewModel {
     private Long id;
 
-    //private String city;
+    private String city;
 
     private String street;
 

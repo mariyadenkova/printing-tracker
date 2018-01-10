@@ -15,7 +15,9 @@ public class CustomerViewModel {
 
     private String uic;
 
-    //private Set<Address> addresses;
+    private Set<Address> addresses;
+
+    private Set<Address> names;
 
     public CustomerViewModel() {
     }
@@ -42,6 +44,14 @@ public class CustomerViewModel {
 
     public void setUic(String uic) {
         this.uic = uic;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 
 }
