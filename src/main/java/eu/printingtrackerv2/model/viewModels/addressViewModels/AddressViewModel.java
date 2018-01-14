@@ -8,7 +8,9 @@ import java.util.Set;
 public class AddressViewModel {
     private Long id;
 
-    private String city;
+    //private String customerName;
+
+    //private String city;
 
     private String street;
 
@@ -26,11 +28,11 @@ public class AddressViewModel {
 
     private String comment;
 
-    private String contactName;
+    /*private String firstName;
 
-    private String phoneNumber;
+    private String lastName;
 
-    private String email;
+    private String username;*/
 
     public Long getId() {
         return id;
@@ -112,27 +114,35 @@ public class AddressViewModel {
         this.comment = comment;
     }
 
-    public String getContactName() {
-        return contactName;
+    /*public String getFirstName() {
+        return firstName;
     }
 
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
+    }*/
+
+    /*public String getCustomerName() {
+        return customerName;
     }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }*/
 }
