@@ -4,13 +4,16 @@ package eu.printingtrackerv2.serviceImpl;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import eu.printingtrackerv2.entities.Address;
 import eu.printingtrackerv2.entities.Customer;
+import eu.printingtrackerv2.entities.User;
 import eu.printingtrackerv2.model.bindingModels.AddressBindingModels.AddAddressBindingModel;
 import eu.printingtrackerv2.model.bindingModels.AddressBindingModels.AddressBindingModel;
 import eu.printingtrackerv2.model.bindingModels.CustomerBindingModels.AddCustomerBindingModel;
 import eu.printingtrackerv2.model.viewModels.addressViewModels.AddressViewModel;
 import eu.printingtrackerv2.model.viewModels.customerViewModels.CustomerNameViewModel;
+import eu.printingtrackerv2.model.viewModels.userViewModel.AddUserToAddressViewModel;
 import eu.printingtrackerv2.repository.AddressRepository;
 import eu.printingtrackerv2.repository.CustomerRepository;
+import eu.printingtrackerv2.repository.UserRepository;
 import eu.printingtrackerv2.service.AddressService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,9 @@ public class AddressServiceImpl implements AddressService {
     private AddressRepository addressRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
@@ -35,6 +41,8 @@ public class AddressServiceImpl implements AddressService {
         Address address = this.modelMapper.map(addAddressBindingModel, Address.class);
         Set<Customer> customers = this.customerRepository.findAllByNameIn(addAddressBindingModel.getCustomers());
         address.setCustomers(customers);
+        Set<User> users = this.userRepository.findAllByUsername(addAddressBindingModel.getUsers());
+        address.setUsers(users);
         this.addressRepository.save(address);
     }
 
@@ -50,8 +58,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Set<AddressViewModel> findAllAddressesByCustomerId(Long customId) {
-        Set<Address> customers = this.addressRepository.findAllByCustomerId(customId);
+    public Set<AddressViewModel> findAllAddressesByCustomerId(Long customerId) {
+        Set<Address> customers = this.addressRepository.findAllByCustomerId(customerId);
         Set<AddressViewModel> customerViewModels = new HashSet<>();
         for(Address address : customers) {
             AddressViewModel model = this.modelMapper.map(address, AddressViewModel.class);
@@ -61,17 +69,4 @@ public class AddressServiceImpl implements AddressService {
         return customerViewModels;
     }
 
-    /*@Override
-    public Set<AddressViewModel> findAllAddressesByCustomerId(Long id) {
-        Customer customer = this.customerRepository.findOne(id);
-        Set<Address> addresses = this.addressRepository.findAllByCustomerId(id);
-        Set<AddressViewModel> models = new HashSet<>();
-        customer.setAddresses(addresses);
-        for (Address address : addresses) {
-            AddressViewModel model = this.modelMapper.map(address, AddressViewModel.class);
-            models.add();
-        }
-
-        return models;
-    }*/
 }

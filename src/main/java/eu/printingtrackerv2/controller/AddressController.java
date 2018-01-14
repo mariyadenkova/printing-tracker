@@ -6,10 +6,12 @@ import eu.printingtrackerv2.model.bindingModels.CustomerBindingModels.CustomerBi
 import eu.printingtrackerv2.model.viewModels.addressViewModels.AddressViewModel;
 import eu.printingtrackerv2.model.viewModels.customerViewModels.CustomerNameViewModel;
 import eu.printingtrackerv2.model.viewModels.customerViewModels.CustomerViewModel;
+import eu.printingtrackerv2.model.viewModels.userViewModel.AddUserToAddressViewModel;
 import eu.printingtrackerv2.repository.AddressRepository;
 import eu.printingtrackerv2.repository.CustomerRepository;
 import eu.printingtrackerv2.service.AddressService;
 import eu.printingtrackerv2.service.CustomerService;
+import eu.printingtrackerv2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -30,9 +33,17 @@ public class AddressController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private UserService userService;
+
     @ModelAttribute("customers")
     public Set<CustomerNameViewModel> getCustomersNames() {
         return this.customerService.getAllCustomersNames();
+    }
+
+    @ModelAttribute("users")
+    public Set<AddUserToAddressViewModel> getAddressUsernames() {
+        return this.userService.findAllUsernames();
     }
 
     @GetMapping("/address")
@@ -42,7 +53,7 @@ public class AddressController {
         return "address";
     }
 
-    @GetMapping("/address/customer/*{customerId}")
+    @GetMapping("/address/customer/{customerId}")
     public String getCustomerAddressesPage(Model model, @PathVariable Long customerId) {
         Set<AddressViewModel> addresses = this.addressService.findAllAddressesByCustomerId(customerId);
         model.addAttribute("addresses", addresses);

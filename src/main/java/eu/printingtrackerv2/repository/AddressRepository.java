@@ -15,11 +15,9 @@ public interface AddressRepository extends CrudRepository<Address, Long> {
     @Query(value = "SELECT a FROM Address AS a")
     Set<Address> findAllAddresses();
 
-    /*@Query(value = "SELECT a FROM Address AS a " +
-            "WHERE a.customer.id = :id")
-    Set<AddressViewModel> findAllByCustomerId(@Param("id") Long id);*/
-
-    @Query(value = "SELECT a.id FROM Address AS a " +
+    @Modifying
+    @Query(value = "SELECT a FROM Address AS a " +
             "WHERE a.id = :id")
     Set<Address> findAllByCustomerId(@Param("id") Long id);
+
 }
